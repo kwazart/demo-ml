@@ -1,10 +1,10 @@
-# pip install numpy tensorflow scipy
+# pip install numpy tensorflow scipy streamlit
 
 import tensorflow.compat.v1 as tf
+import streamlit as stl
 
 tf.disable_v2_behavior()
 
-import os
 import io
 import IPython.display
 import numpy as np
@@ -121,54 +121,65 @@ def imshow(a, format='png', jpeg_fallback=True):
     PIL.Image.fromarray(a).save(data, format)
     im_data = data.getvalue()
     try:
-        with open("image/image_{}.png".format(str(uuid.uuid4())), "wb") as png:
+        with open("./practice_2/polozov/image/sample.png".format(str(uuid.uuid4())), "wb") as png:
             png.write(im_data)
-        disp = IPython.display.display(IPython.display.Image(im_data))
     except IOError:
-        if jpeg_fallback and format != 'jpeg':
-            print(('Warning: image was too large to display in format "{}"; '
-                   'trying jpeg instead.').format(format))
-            return imshow(a, format='jpeg')
-        else:
-            raise
-    return disp
+        raise
+
 
 
 initializer = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(initializer)
 
-num_samples = 10 #@param {type:"slider", min:1, max:20, step:1}
-truncation = 0.4 #@param {type:"slider", min:0.02, max:1, step:0.02}
-noise_seed = 0 #@param {type:"slider", min:0, max:100, step:1}
-category = "933) cheeseburger"
+num_samples = 10  # @param {type:"slider", min:1, max:20, step:1}
+truncation = 0.4  # @param {type:"slider", min:0.02, max:1, step:0.02}
+noise_seed = 0  # @param {type:"slider", min:0, max:100, step:1}
+# category = "933) cheeseburger"
+# category = "8) hen"
 
-z = truncated_z_sample(num_samples, truncation, noise_seed)
-y = int(category.split(')')[0])
+# -------------------------------------------------------------------
+stl.title('Практика #2')
+stl.header('Модель для генерации изображений по номеру категории')
+categories = ("933) Бургер", "207) Золотистый ретривер", "8) Петух")
+category = stl.radio("Какие изображения сгенерировать?", options=categories, key="radio_categories_checker")
 
-ims = sample(sess, z, y, truncation=truncation)
-imshow(imgrid(ims, cols=min(num_samples, 5)))
 
-num_samples = 2 #@param {type:"slider", min:1, max:5, step:1}
-num_interps = 5 #@param {type:"slider", min:2, max:10, step:1}
-truncation = 0.2 #@param {type:"slider", min:0.02, max:1, step:0.02}
-noise_seed_A = 0 #@param {type:"slider", min:0, max:100, step:1}
-category_A = "207) golden retriever"
-noise_seed_B = 0 #@param {type:"slider", min:0, max:100, step:1}
-category_B = "8) hen"
+def generate_image():
+    z = truncated_z_sample(num_samples, truncation, noise_seed)
+    y = int(category.split(')')[0])
 
-def interpolate_and_shape(A, B, num_interps):
-  interps = interpolate(A, B, num_interps)
-  return (interps.transpose(1, 0, *range(2, len(interps.shape)))
-                 .reshape(num_samples * num_interps, *interps.shape[2:]))
+    ims = sample(sess, z, y, truncation=truncation)
+    imshow(imgrid(ims, cols=min(num_samples, 5)))
 
-z_A, z_B = [truncated_z_sample(num_samples, truncation, noise_seed)
-            for noise_seed in [noise_seed_A, noise_seed_B]]
-y_A, y_B = [one_hot([int(category.split(')')[0])] * num_samples)
-            for category in [category_A, category_B]]
+    stl.image('./practice_2/polozov/image/sample.png', caption='Сгенерированное изображение', width=400)
 
-z_interp = interpolate_and_shape(z_A, z_B, num_interps)
-y_interp = interpolate_and_shape(y_A, y_B, num_interps)
 
-ims = sample(sess, z_interp, y_interp, truncation=truncation)
-imshow(imgrid(ims, cols=num_interps))
+generate_btn = stl.button("Generate", on_click=generate_image)
+
+# -------------------------------------------------------------------
+# num_samples = 2 #@param {type:"slider", min:1, max:5, step:1}
+# num_interps = 5 #@param {type:"slider", min:2, max:10, step:1}
+# truncation = 0.2 #@param {type:"slider", min:0.02, max:1, step:0.02}
+# noise_seed_A = 0 #@param {type:"slider", min:0, max:100, step:1}
+# category_A = "207) golden retriever"
+# noise_seed_B = 0 #@param {type:"slider", min:0, max:100, step:1}
+# category_B = "8) hen"
+
+# -------------------------------------------------------------------
+
+# def interpolate_and_shape(A, B, num_interps):
+#   interps = interpolate(A, B, num_interps)
+#   return (interps.transpose(1, 0, *range(2, len(interps.shape)))
+#                  .reshape(num_samples * num_interps, *interps.shape[2:]))
+#
+# z_A, z_B = [truncated_z_sample(num_samples, truncation, noise_seed)
+#             for noise_seed in [noise_seed_A, noise_seed_B]]
+# y_A, y_B = [one_hot([int(category.split(')')[0])] * num_samples)
+#             for category in [category_A, category_B]]
+#
+# z_interp = interpolate_and_shape(z_A, z_B, num_interps)
+# y_interp = interpolate_and_shape(y_A, y_B, num_interps)
+#
+# ims = sample(sess, z_interp, y_interp, truncation=truncation)
+# imshow(imgrid(ims, cols=num_interps))
