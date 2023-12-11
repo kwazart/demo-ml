@@ -27,43 +27,15 @@ def load_model():
     return model
 
 
-# url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-# image = Image.open(requests.get(url, stream=True).raw)
-#
-# result = obj_detect_pip(
-#     image,
-#     candidate_labels=["cat", "TV remote"],
-# )
-#
-# print(result)
-#
-# url = "https://www.vocord.ru/upload/iblock/bb0/bb0ecea977a089a540f2161b7157e4ef.jpg"
-# image = Image.open(requests.get(url, stream=True).raw)
-#
-# result = obj_detect_pip(
-#     image,
-#     candidate_labels=["car"],
-# )
-#
-# print(result)
-#
-# url = "https://vestart.ru/images/2021/10/21/77777777_large.jpg"
-# image = Image.open(requests.get(url, stream=True).raw)
-#
-# result = obj_detect_pip(
-#     image,
-#     candidate_labels=["animal"],
-# )
-#
-# print(result)
-
 def preprocess_image(img):
     img = img.resize((224, 224))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
-    return x
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = preprocess_input(img_array)
+    return img_array
 
+
+user_target = st.text_input('Введи название объекта (на английском) для поиска в картинке')
 
 image_url = st.text_input('Для поиска в картинке дай ссылку на картинку в поле ниже')
 
@@ -72,36 +44,47 @@ image_obj = None
 if image_url:
     image_obj = Image.open(requests.get(image_url, stream=True).raw)
 
-    st.image(image_obj)
-
 model = load_model()
 
-if image_obj:
+obj_on_image = []
 
-    x = preprocess_image(image_obj)
-    preds = model.predict(x)
+if user_target:
+    obj_on_image.extend(user_target.split(", "))
+
+if image_obj:
+    pre_img = preprocess_image(image_obj)
+    preds = model.predict(pre_img)
 
     classes = decode_predictions(preds, top=3)[0]
+    # st.write(classes)
 
-    obj_on_image = []
     for cl in classes:
+        if cl[2] < 0.1:
+            continue
+
         obj_on_image.append(cl[1])
-        st.write(cl[1], cl[2])
+        st.write("Автоопределение:", cl[1], cl[2])
 
-    if obj_on_image:
-        result = obj_detect_pip(
-            image_obj,
-            candidate_labels=obj_on_image,
-        )
+if image_obj and obj_on_image:
+    st.write("Объекты которые будем искать и отмечать на картинке:", ", ".join(obj_on_image))
+    result = obj_detect_pip(
+        image_obj,
+        candidate_labels=obj_on_image,
+    )
 
-        draw = ImageDraw.Draw(image_obj)
-        for prediction in result:
-            box = prediction["box"]
-            label = prediction["label"]
-            score = prediction["score"]
+    draw = ImageDraw.Draw(image_obj)
+    for prediction in result:
+        box = prediction["box"]
+        label = prediction["label"]
+        score = prediction["score"]
 
-            xmin, ymin, xmax, ymax = box.values()
-            draw.rectangle((xmin, ymin, xmax, ymax), outline="red", width=1)
-            draw.text((xmin, ymin), f"{label}: {round(score, 2)}", fill="white")
+        xmin, ymin, xmax, ymax = box.values()
+        draw.rectangle((xmin, ymin, xmax, ymax), outline="red", width=1)
+        draw.text((xmin, ymin), f"{label}: {round(score, 2)}", fill="white")
 
-        st.image(image_obj)
+if image_obj:
+    st.image(image_obj)
+
+# https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU
+# https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg
+# https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg

@@ -8,7 +8,8 @@ venv:
 # Установка указанных пакетов (когда отсутствует файл `requirements.txt`)
 .PHONY: direct_deps
 direct_deps: venv
-	(. ./venv/bin/activate; pip3 install requests transformers Image torch)
+	(. ./venv/bin/activate; pip3 install \
+		requests transformers Pillow torch transformers streamlit numpy tensorflow)
 
 # Установка пакетов указанных в `requirements.txt`
 .PHONY: deps
@@ -28,4 +29,4 @@ freeze:
 # Запуск
 .PHONY: run
 run:
-	(. ./venv/bin/activate; python3 main.py)
+	(. ./venv/bin/activate; streamlit run main.py)

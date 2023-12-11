@@ -3,7 +3,7 @@ __Выполнил:__ *Домченко Максим*
 
 __Студент группы:__ *РИМ-130962*
 
-__Задача:__ *Поиск объектов в изображение по названию*
+__Задача:__ *Поиск объектов в изображении*
 
 __Описание:__
 
@@ -21,11 +21,28 @@ __Варианты использования:__
 * Поиск предметов на конвейере
 * Поиск запрещенных объектов
 
+__Реализация__
+* Реализовано WEB приложение с интерфейсом с помощью библиотеки `streamlit`
+* Для первоначального определения объектов на изображении интегрирована обученная модель `EfficientNetB0`
+* Для определения объектов по названию в изображении, интегрирована обученная модель `google/owlvit-base-patch32`
+
 __Запуск:__
-* Перейти в папку domchenko `cd ./practice_1/domchenko/`
+* Перейти в папку domchenko `cd ./practice_2/domchenko/`
 * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
 * Запустить командой `make run`
 
 Дополнительные команды описаны в `Makefile`
 
 Для систем в которых отсутствует утилита `make`, запуск можно выполнить путём выполнения содержимого соответствующих команд описанных в `Makefile`
+
+__Примеры__
+* Интерфейс: ![image/interface.png](image/interface.png)
+* Можно сразу указать объект (объекты через запятую) для поиска и ссылку на картинку: ![image/with_custom_target.png](image/with_custom_target.png)
+* Объекты для поиска можно не указывать, встроенная модель `EfficientNetB0` попробует сама найти объекты и выведет их:
+  * ![image/without_custom_target_1.png](image/without_custom_target_1.png)
+  * ![image/without_custom_target_2.png](image/without_custom_target_2.png)
+
+__Используемые ссылки для примеров__
+* https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg
+* https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU
+* https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg
