@@ -27,12 +27,22 @@ __Реализация:__
 * Для определения объектов по названию в изображении, интегрирована обученная модель `google/owlvit-base-patch32`
 * API размещено в Яндекс.Облако
 
-__Локальный запуск и как разворачивал в облаке:__
-* Стянут проект локально `git clone git@github.com:kwazart/demo-ml.git`
-* Стянут проект для облака по https `git clone https://github.com/kwazart/demo-ml.git`
+__Локальный запуск:__
+* Стянут проект `git clone git@github.com:kwazart/demo-ml.git`
 * Перейти в проект `cd demo-ml`
 * Переключить ветку на практическую #3 `git checkout practice_4-domchenko`
 * Перейти в папку с практической `cd ./practice_4-domchenko/`
+* Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
+* Запустить командой `make run`
+
+__Запуск в облаке:__
+* Подключиться к ВМ в облаке по ssh
+* Стянут проект по https `git clone https://github.com/kwazart/demo-ml.git`
+* Перейти в проект `cd demo-ml`
+* Переключить ветку на практическую #4 `git checkout practice_4-domchenko`
+* Перейти в папку с практической `cd ./practice_4-domchenko/`
+* Установить утилиту `make` командой `sudo apt install make`
+* Установить `venv` для `python` командой `sudo apt install python3.10-venv`
 * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
 * Запустить командой `make run`
 
