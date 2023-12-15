@@ -25,12 +25,13 @@ __Реализация:__
 * Реализовано API с помощью библиотеки FastAPI
 * Для первоначального определения объектов на изображении интегрирована обученная модель `EfficientNetB0`
 * Для определения объектов по названию в изображении, интегрирована обученная модель `google/owlvit-base-patch32`
+* API размещено в Яндекс.Облако
 
-__Запуск:__
+__Локальный запуск и как разворачивал в облаке:__
 * Стянут проект `git clone git@github.com:kwazart/demo-ml.git`
 * Перейти в проект `cd demo-ml`
-* Переключить ветку на практическую #3 `git checkout practice_3-domchenko`
-* Перейти в папку с практической `cd ./practice_3-domchenko/`
+* Переключить ветку на практическую #3 `git checkout practice_4-domchenko`
+* Перейти в папку с практической `cd ./practice_4-domchenko/`
 * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
 * Запустить командой `make run`
 
@@ -40,11 +41,16 @@ __Запуск:__
 
 __Результат:__
 * Разработано API с интегрированными обученными моделями ML:
+* Локальный:
   * `http://127.0.0.1:8000/` - расположено приветствие, можно проверить, что сервер запущен
   * `http://127.0.0.1:8000/docs` - расположена документация
   * `http://127.0.0.1:8000/predict/` - метод с моделями, примеры запросов ниже
+* В облаке:
+  * `http://158.160.133.28:8000/` - расположено приветствие, можно проверить, что сервер запущен
+  * `http://158.160.133.28:8000/docs` - расположена документация
+  * `http://158.160.133.28:8000/predict/` - метод с моделями, примеры запросов ниже
 
-__Примеры запросов для curl:__
+__Примеры запросов для curl локально:__
 
 `curl -X 'POST'
     'http://127.0.0.1:8000/predict/'
@@ -64,6 +70,32 @@ __Примеры запросов для curl:__
 
 `curl -X 'POST'
     'http://127.0.0.1:8000/predict/'
+    -H 'Content-Type: application/json'
+    -d '{
+    "url": "https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg",
+    "targets": "pineapple"
+}'`
+
+__Примеры запросов для curl в облаке:__
+
+`curl -X 'POST'
+    'http://158.160.133.28:8000/predict/'
+    -H 'Content-Type: application/json'
+    -d '{
+    "url": "https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg",
+    "targets": "car"
+}'`
+
+`curl -X 'POST'
+    'http://158.160.133.28:8000/predict/'
+    -H 'Content-Type: application/json'
+    -d '{
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU",
+    "targets": "hog"
+}'`
+
+`curl -X 'POST'
+    'http://158.160.133.28:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg",
