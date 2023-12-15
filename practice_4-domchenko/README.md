@@ -28,7 +28,8 @@ __Реализация:__
 * API размещено в Яндекс.Облако
 
 __Локальный запуск и как разворачивал в облаке:__
-* Стянут проект `git clone git@github.com:kwazart/demo-ml.git`
+* Стянут проект локально `git clone git@github.com:kwazart/demo-ml.git`
+* Стянут проект для облака по https `git clone https://github.com/kwazart/demo-ml.git`
 * Перейти в проект `cd demo-ml`
 * Переключить ветку на практическую #3 `git checkout practice_4-domchenko`
 * Перейти в папку с практической `cd ./practice_4-domchenko/`
