@@ -28,7 +28,8 @@ __Реализация:__
 
 __Запуск:__
 * Стянут проект `git clone git@github.com:kwazart/demo-ml.git`
-* перейти в проект `cd demo-ml`
+* Перейти в проект `cd demo-ml`
+* Переключить ветку на практическую #3 `git checkout practice_3-domchenko`
 * Перейти в папку с практической `cd ./practice_3-domchenko/`
 * Подготовить окружение (_виртуальная среда, установка пакетов_) командой `make deps`
 * Запустить командой `make run`
