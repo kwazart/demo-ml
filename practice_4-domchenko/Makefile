@@ -29,4 +29,4 @@ freeze:
 # Запуск
 .PHONY: run
 run:
-	(. ./venv/bin/activate; uvicorn main:app --workers 4 --host 127.0.0.1 --port 8000)
+	(. ./venv/bin/activate; uvicorn main:app --workers 2 --host localhost --port 8001)

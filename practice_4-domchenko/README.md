@@ -57,9 +57,9 @@ __Результат:__
   * `http://127.0.0.1:8000/docs` - расположена документация
   * `http://127.0.0.1:8000/predict/` - метод с моделями, примеры запросов ниже
 * В облаке:
-  * `http://158.160.133.28:8000/` - расположено приветствие, можно проверить, что сервер запущен
-  * `http://158.160.133.28:8000/docs` - расположена документация
-  * `http://158.160.133.28:8000/predict/` - метод с моделями, примеры запросов ниже
+  * `http://158.160.132.70:8000/` - расположено приветствие, можно проверить, что сервер запущен
+  * `http://158.160.132.70:8000/docs` - расположена документация
+  * `http://158.160.132.70:8000/predict/` - метод с моделями, примеры запросов ниже
 
 __Примеры запросов для curl локально:__
 
@@ -90,7 +90,7 @@ __Примеры запросов для curl локально:__
 __Примеры запросов для curl в облаке:__
 
 `curl -X 'POST'
-    'http://158.160.133.28:8000/predict/'
+    'http://158.160.132.70:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg",
@@ -98,7 +98,7 @@ __Примеры запросов для curl в облаке:__
 }'`
 
 `curl -X 'POST'
-    'http://158.160.133.28:8000/predict/'
+    'http://158.160.132.70:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU",
@@ -106,7 +106,7 @@ __Примеры запросов для curl в облаке:__
 }'`
 
 `curl -X 'POST'
-    'http://158.160.133.28:8000/predict/'
+    'http://158.160.132.70:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg",
