@@ -53,18 +53,18 @@ __Запуск в облаке:__
 __Результат:__
 * Разработано API с интегрированными обученными моделями ML:
 * Локальный:
-  * `http://localhost:8501/` - расположено приветствие, можно проверить, что сервер запущен
-  * `http://localhost:8501/docs` - расположена документация
-  * `http://localhost:8501/predict/` - метод с моделями, примеры запросов ниже
+  * `http://localhost:8000/` - расположено приветствие, можно проверить, что сервер запущен
+  * `http://localhost:8000/docs` - расположена документация
+  * `http://localhost:8000/predict/` - метод с моделями, примеры запросов ниже
 * В облаке:
-  * `http://158.160.137.157:8501/` - расположено приветствие, можно проверить, что сервер запущен
-  * `http://158.160.137.157:8501/docs` - расположена документация
-  * `http://158.160.137.157:8501/predict/` - метод с моделями, примеры запросов ниже
+  * `http://158.160.137.157:8000/` - расположено приветствие, можно проверить, что сервер запущен
+  * `http://158.160.137.157:8000/docs` - расположена документация
+  * `http://158.160.137.157:8000/predict/` - метод с моделями, примеры запросов ниже
 
 __Примеры запросов для curl локально:__
 
 `curl -X 'POST'
-    'http://localhost:8501/predict/'
+    'http://localhost:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg",
@@ -72,7 +72,7 @@ __Примеры запросов для curl локально:__
 }'`
 
 `curl -X 'POST'
-    'http://localhost:8501/predict/'
+    'http://localhost:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU",
@@ -80,7 +80,7 @@ __Примеры запросов для curl локально:__
 }'`
 
 `curl -X 'POST'
-    'http://localhost:8501/predict/'
+    'http://localhost:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg",
@@ -90,7 +90,7 @@ __Примеры запросов для curl локально:__
 __Примеры запросов для curl в облаке:__
 
 `curl -X 'POST'
-    'http://158.160.137.157:8501/predict/'
+    'http://158.160.137.157:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://parkingcars.ru/wp-content/uploads/2021/02/stoyanka-1024x683.jpg",
@@ -98,7 +98,7 @@ __Примеры запросов для curl в облаке:__
 }'`
 
 `curl -X 'POST'
-    'http://158.160.137.157:8501/predict/'
+    'http://158.160.137.157:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2_q3Ph31cc_MgsovOHJOKqIyTxaWnWmckLw&usqp=CAU",
@@ -106,7 +106,7 @@ __Примеры запросов для curl в облаке:__
 }'`
 
 `curl -X 'POST'
-    'http://158.160.137.157:8501/predict/'
+    'http://158.160.137.157:8000/predict/'
     -H 'Content-Type: application/json'
     -d '{
     "url": "https://storage.yandexcloud.net/mfi/1242/products/main/3474.jpg",
