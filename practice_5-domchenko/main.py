@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from src.handler.handler import handler
-from src.handler.handler import Req
+
+from src.handler.handler import handler, Req
 
 app = FastAPI()
 
@@ -8,7 +8,7 @@ app = FastAPI()
 # метод приветствия для проверки работы сервера
 @app.get("/")
 def root():
-    return {'message': 'Hi there!'}
+    return {'message': 'Hello World!!!'}
 
 
 # метод поиска заданных объектов в картинке по ссылке

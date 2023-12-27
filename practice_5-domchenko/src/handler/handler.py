@@ -1,4 +1,3 @@
-import torch
 import requests
 from PIL import Image
 from pydantic import BaseModel
@@ -11,13 +10,6 @@ from ..model.obj_detect_by_target import get_obj_detect_by_target
 class Req(BaseModel):
     url: str
     targets: str
-
-
-# определяем на чем будем запускать модель
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-else:
-    device = torch.device("cpu")
 
 # загружаем модель для автоопределения
 model_detect_auto = get_obj_detect_auto()

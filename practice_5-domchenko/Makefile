@@ -1,4 +1,4 @@
-# Для использования необходимо находится в practice_4-domchenko/
+# Для использования необходимо находится в practice_5-domchenko/
 
 # Подготовка виртуального окружения
 .PHONY: venv
@@ -9,7 +9,7 @@ venv:
 .PHONY: direct_deps
 direct_deps: venv
 	(. ./venv/bin/activate; pip3 install \
-		requests transformers Pillow torch transformers numpy tensorflow pydantic fastapi uvicorn)
+		requests transformers Pillow torch transformers numpy tensorflow pydantic fastapi uvicorn pytest httpx)
 
 # Установка пакетов указанных в `requirements.txt`
 .PHONY: deps
@@ -30,3 +30,8 @@ freeze:
 .PHONY: run
 run:
 	(. ./venv/bin/activate; uvicorn main:app --workers 4 --host 0.0.0.0 --port 8000)
+
+# Запуск тестов
+.PHONY: test
+test:
+	(. ./venv/bin/activate; pytest)
