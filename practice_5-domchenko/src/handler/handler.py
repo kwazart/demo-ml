@@ -11,6 +11,7 @@ class Req(BaseModel):
     url: str
     targets: str
 
+
 # загружаем модель для автоопределения
 model_detect_auto = get_obj_detect_auto()
 

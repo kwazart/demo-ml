@@ -12,7 +12,7 @@ from tensorflow.keras.applications.efficientnet import preprocess_input
 def test_obj_detect_auto():
     model = get_obj_detect_auto()
     assert model is not None
-    assert type(model) == type(EfficientNetB0(weights='imagenet'))
+    assert isinstance(model, type(EfficientNetB0(weights='imagenet')))
 
 
 def test_preprocess_image():
