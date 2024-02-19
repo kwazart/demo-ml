@@ -118,7 +118,7 @@ def imshow(a, file_format='png'):
     PIL.Image.fromarray(a).save(data, file_format)
     im_data = data.getvalue()
     try:
-        with open("./practice_2/polozov/image/sample.png".format(str(uuid.uuid4())), "wb") as png:
+        with open("./practice_2/polozov/image/sample.png".format(), "wb") as png:
             png.write(im_data)
     except IOError:
         raise

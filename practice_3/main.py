@@ -30,5 +30,5 @@ def predict(item: Item):
 
 
 @app.get("/history")
-def predict():
+def history():
     return history.data
