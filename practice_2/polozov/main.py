@@ -6,7 +6,6 @@ import numpy as np
 import PIL.Image
 from scipy.stats import truncnorm
 import tensorflow_hub as hub
-import uuid
 
 tf.disable_v2_behavior()
 
