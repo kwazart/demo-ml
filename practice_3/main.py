@@ -1,16 +1,7 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from transformers import pipeline
 
-
-class Item(BaseModel):
-    question: str
-    context: str
-
-
-class HistoryData:
-    data: list
-
+from entity import HistoryData, Item
 
 app = FastAPI()
 model_name = "deepset/roberta-base-squad2"
