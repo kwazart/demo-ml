@@ -12,6 +12,11 @@ history.data = list()
 
 @app.post("/predict")
 def predict(item: Item):
+    """Получить ответ на вопрос исходя из контекста.
+
+    Keyword arguments:
+    item -- объект с вопросом и контекстом
+    """
     input_data = {
         'question': item.question,
         'context': item.context
@@ -22,4 +27,5 @@ def predict(item: Item):
 
 @app.get("/history")
 def get_history():
+    """Запрос истории ответов текущей сессии."""
     return history.data
