@@ -1,16 +1,7 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from transformers import pipeline
 
-
-class Item(BaseModel):
-    question: str
-    context: str
-
-
-class HistoryData:
-    data: list
-
+from entity import HistoryData, Item
 
 app = FastAPI()
 model_name = "deepset/roberta-base-squad2"
@@ -21,6 +12,11 @@ history.data = list()
 
 @app.post("/predict")
 def predict(item: Item):
+    """Получить ответ на вопрос исходя из контекста.
+
+    Keyword arguments:
+    item -- объект с вопросом и контекстом
+    """
     input_data = {
         'question': item.question,
         'context': item.context
@@ -30,5 +26,6 @@ def predict(item: Item):
 
 
 @app.get("/history")
-def predict():
+def get_history():
+    """Запрос истории ответов текущей сессии."""
     return history.data

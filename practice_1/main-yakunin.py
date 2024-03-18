@@ -1,4 +1,4 @@
-'''
+"""
 Классификатор эмоций коротких русских текстов.
 
 __Описание__:
@@ -18,7 +18,7 @@ __Выполнил:__
 
 * Якунин Александр Геннадиевич, студент группы РИМ 130962.
 
-'''
+"""
 
 from transformers import pipeline
 
@@ -27,4 +27,3 @@ model = pipeline(model="seara/rubert-tiny2-ru-go-emotions")
 result = model("Привет, ты мне нравишься!")
 
 print(result)
-

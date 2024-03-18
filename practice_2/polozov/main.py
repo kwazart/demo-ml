@@ -1,17 +1,13 @@
 # pip install numpy tensorflow scipy streamlit
-
-import tensorflow.compat.v1 as tf
 import streamlit as stl
-
-tf.disable_v2_behavior()
-
+import tensorflow.compat.v1 as tf
 import io
-import IPython.display
 import numpy as np
 import PIL.Image
 from scipy.stats import truncnorm
 import tensorflow_hub as hub
-import uuid
+
+tf.disable_v2_behavior()
 
 module_path = 'https://tfhub.dev/deepmind/biggan-deep-256/1'  # 256x256 BigGAN-deep
 tf.reset_default_graph()
@@ -115,17 +111,16 @@ def imgrid(imarray, cols=5, pad=1):
     return grid
 
 
-def imshow(a, format='png', jpeg_fallback=True):
+def imshow(a, file_format='png'):
     a = np.asarray(a, dtype=np.uint8)
     data = io.BytesIO()
-    PIL.Image.fromarray(a).save(data, format)
+    PIL.Image.fromarray(a).save(data, file_format)
     im_data = data.getvalue()
     try:
-        with open("./practice_2/polozov/image/sample.png".format(str(uuid.uuid4())), "wb") as png:
+        with open("./practice_2/polozov/image/sample.png".format(), "wb") as png:
             png.write(im_data)
     except IOError:
         raise
-
 
 
 initializer = tf.global_variables_initializer()
