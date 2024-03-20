@@ -5,16 +5,26 @@ from io import BytesIO
 
 
 def load_model():
-    """The function loads a model describing the passed image, and returns the function image_to_text(img_url), to pass its URL to the image."""
+    """Функция загрузки модели.
 
+    Returns:
+        image_to_text(url) -> str: асинхронная функция обработки изображения в текст.
+    """
     processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
     model = BlipForConditionalGeneration.from_pretrained(
         "Salesforce/blip-image-captioning-large"
     )
 
     async def image_to_text(url):
-        """The function takes a URL to a image and returns a description of it."""
+        """Асинхронная функция обработки изображения в текст.
+        Запрашивает изображение по URL через HTTP GET запрос.
 
+        Args:
+            url (str): URL изображения.
+
+        Returns:
+            str: текстовое описание изображения.
+        """
         async with httpx.AsyncClient() as client:
             response = await client.get(url)
 
