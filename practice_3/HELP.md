@@ -7,7 +7,6 @@
     git clone git@github.com:kwazart/demo-ml.git
     cd demo-ml
     git checkout practice-3-baklanov
-    cd practice_3
 
 **Установка окружения и зависимостей:**
 
@@ -22,7 +21,7 @@
 
 **Запуск веб-сервера для разработки:**
 
-    uvicorn main:app --workers 4 --host 0.0.0.0 --port 8000
+    uvicorn practice_3.src.main:app --workers 4 --host 0.0.0.0 --port 8000
 
 Далее можно производить HTTP запросы:
 
