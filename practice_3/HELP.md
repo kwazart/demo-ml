@@ -13,11 +13,12 @@
     pip install virtualenv
     virtualenv venv
     source venv/bin/activate
+    python -m pip install pytest
     python -m pip install -r requirements.txt
 
 **Без requirements.txt зависимости следующие:**
 
-    python -m pip install fastapi uvicorn httpx Pillow transformers torch torchvision torchaudio
+    python -m pip install fastapi uvicorn httpx Pillow transformers torch torchvision
 
 **Запуск веб-сервера для разработки:**
 
